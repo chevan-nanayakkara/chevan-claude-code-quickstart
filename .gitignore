@@ -1,0 +1,23 @@
+# System files
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+Desktop.ini
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# Temporary/working files
+*.log
+.tmp/
+*.backup
+
+# Claude Code local settings
+.claude/
