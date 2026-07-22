@@ -181,18 +181,52 @@ The split (capture in `-tasks.md`, visibility in `0-project.md`) preserves per-c
 
 #### Tasks File Structure (Standard)
 
-**Four-Section Layout:**
+**Section Layout:**
 
-Every `-tasks.md` file uses this four-section layout, in this order.
+Every `-tasks.md` file uses this layout, in this order. (Format current as of June 20, 2026, second revision of the day. No standalone summary section and no Status Key block; each of Open Projects and Closed Projects leads with its own focused `### Summary` subsection, and Notes / Reference sits at the end.)
 
-1. **Summary of Open Projects** — Bullet list at the top showing only active/open projects with one-line digest per project (number, name, status, key dependency or next-action signal). Bullets, not a table (per the no-markdown-tables formatting rule). Remove rows when projects move to Closed / Completed Projects.
-2. **Notes/Reference** — Catch-all for context the open work depends on: session-starter prompts, key file pointers, design decisions, glossary entries, links to ADRs / decision logs / sibling conversations, plus any other notes that don't belong inside a project. The "what an operator needs to know to engage" section. Living document; prune as projects close out.
-3. **Open Projects** — Detailed project / phase / deliverable / task breakdown for everything currently in flight. One H3 per project.
-4. **Closed / Completed Projects** — Historical record. Each entry includes what was delivered, completion date, file references, and any follow-up context worth keeping. Append-only; do not prune. (Section name covers both completed-with-delivery and closed-without-completion.)
+1. **YAML frontmatter.**
+2. **Title and header information** — companion conversation pointer, reference pointers, anything orienting.
+3. **Open Projects** — leads with a `### Summary` subsection (one-line digest per open project: number, name, status, key dependency or next-action signal; bullets, not a table per the no-markdown-tables rule), followed by a `### Priority order (AI-maintained recommendation)` subsection (ranked list of the open projects with rationale per position; see the Priority-order convention below), then one detail block per open project. The Deferred backlog lives here too.
+4. **Closed Projects** — leads with a `### Summary` subsection (recently closed projects, most recent first), then the detail blocks. Append-only; do not prune. (Covers both completed-with-delivery and closed-without-completion.)
+5. **Notes / Reference** — at the end: catch-all for context the work depends on (session-starter prompts, key file pointers, design decisions, glossary entries, links to ADRs / decision logs / sibling conversations). The "what an operator needs to know to engage" reference shop. Living document; prune as projects close out.
+
+No Status Key legend block: `[ ]` / `[x]` checkboxes are self-evident; any non-standard marker is explained inline where used.
+
+**Grooming rule — move the row Open→Closed on close (the most commonly missed step).** When you complete or close a project, in the *same edit* move its row from the `### Summary` under **Open Projects** to the `### Summary` under **Closed Projects** (and migrate its detail block from Open Projects to Closed Projects). The open Summary must never list a completed project as if open. Grooming is not finished until the open Summary matches the actual open work. The `open-projects` skill reads `Open Projects → ### Summary` to build the hub rollup, so a stale open Summary corrupts it; the skill flags any completed project still in the open Summary under its "Files needing cleanup" findings.
+
+**Priority-order convention (July 22, 2026).** The `### Priority order (AI-maintained recommendation)` subsection sits under **Open Projects** right below `### Summary`. It carries the AI's current recommended ranking of the file's open projects — a durable answer to "if I picked up this thread cold, what should I work on first?" Rationale: operators repeatedly ask mid-conversation for a priority order + reasoning, then lose it as the conversation moves on. Making it a required subsection puts the answer in the file that owns those projects.
+
+**Shape of the subsection:**
+
+```markdown
+### Priority order (AI-maintained recommendation)
+
+*Refreshed <date> by AI. Each item marked `*(AI)*` was ranked by the AI on this grooming pass; each `*(operator)*` was manually set and is preserved verbatim on subsequent grooming touches.*
+
+1. **Project N — <title>.** *(AI)* / *(operator)* <One-line rationale for this position — the "why first" or "why this rank," including any sync/dependency notes.>
+2. **Project N — <title>.** *(AI)* / *(operator)* ...
+```
+
+**Item-level provenance markers** — each item carries one of two markers so subsequent groomings know what to preserve:
+
+- **`*(AI)*`** — the AI ranked this item. The next grooming pass is free to re-rank, re-rationalize, or reorder it as new signals surface.
+- **`*(operator)*`** — the operator manually set this item's position (and typically wrote or approved its rationale). The next grooming preserves it verbatim in its current position; the AI never overwrites operator-set items.
+- **Unmarked** — treated as `*(AI)*` for backward compatibility with pre-convention files.
+
+**Bounded write scope** — the AI writes to *only* this subsection during grooming. Everything else in **Open Projects** (the `### Summary` above, the per-project detail blocks below), all of **Closed Projects**, and all of **Notes / Reference** stays operator-authoritative (the AI only edits those when the operator's current prompt explicitly asks — e.g., adding a new project, moving a project Open→Closed).
+
+**Behavior on grooming** — every AI grooming touch of a `-tasks.md` file refreshes this subsection: read existing items, preserve `*(operator)*` items exactly (position + rationale), re-rank the `*(AI)*` items among themselves in whatever gaps remain, insert any new projects with `*(AI)*` at the position the AI thinks best. If the AI wants to note an alternative view on an operator-set item, that note goes in the current run-prompt response or conversation entry, **never inside the subsection** — the subsection stays clean.
+
+**Relationship to `prioritize-open-projects` skill** — different flow, different scope. The `prioritize-open-projects` skill produces on-demand *cross-file* analytical output (tiered view across the whole workspace) to chat or the invoking conversation file, still read-only, never writes to `-tasks.md`. This `### Priority order` subsection is *per-file* durable ranking refreshed by any grooming touch. The two answer different questions ("across the whole workspace, what?" vs. "inside this thread, what?").
+
+**On operator override without conflict** — if the operator never manually overrides the AI's ranking, that is fine. Leaving everything marked `*(AI)*` is a valid steady state; the AI just re-ranks on each groom based on current signals. The `*(operator)*` marker is available when the operator has a specific reason to lock a position, not required.
+
+*(Convention originated in workspace-chevan July 22, 2026. Ported here as part of cwos-v1.10.0 for cross-repo standard parity.)*
 
 **Four-Level Hierarchy:**
 
-Within the Open Projects and Closed / Completed Projects sections, use this hierarchy:
+Within the Open Projects and Closed Projects sections, use this hierarchy:
 
 - **Project** (H3, prefixed with "Project N:"): `### Project 1: Config Enhancement`
 - **Phase** (H4): `#### Phase 1: Research`
@@ -201,11 +235,7 @@ Within the Open Projects and Closed / Completed Projects sections, use this hier
 
 The numbering prefix (`Project N:`) enables stable cross-document references ("see Project 3 in `media-platform-work-tasks.md`") and survives renames better than name-only references.
 
-**Summary List:**
-
-The summary list at the top provides at-a-glance status for all active work. Only include open/active projects — when a project completes, remove it from the summary list and move its detail block to the Closed / Completed Projects section.
-
-**Closed / Completed Projects Section:**
+**Closed Projects Section:**
 
 Each entry should include:
 
@@ -214,7 +244,7 @@ Each entry should include:
 - File references (paths to deliverables, specs, or artifacts produced)
 - Reason for closure if not completed-with-delivery (e.g., scope shift, deprioritized, blocked indefinitely)
 
-**Why this section order:** the Summary lets a returning operator (or AI) see live state immediately without scrolling; Notes/Reference supplies the context needed to act on any of those items; Open Projects is the detailed surface; Closed / Completed sits at the bottom because it's reference, not active work. If you wrote the sections in a different order historically, move them at the next meaningful edit — don't force a one-off reshuffle.
+**Why this section order:** giving each of Open and Closed its own `### Summary` keeps each digest focused and relevant (open summary = open work only; closed summary = closed work only), instead of one mixed standalone summary. Open Projects leads because it is the live work; Closed Projects is the historical record; Notes / Reference, the stable reference shop, sits at the end out of the way of the active work.
 
 This structure scales from single-project tasks files to multi-project tracking while keeping the summary scannable and the detail organized.
 

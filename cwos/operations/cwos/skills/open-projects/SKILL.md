@@ -1,6 +1,6 @@
 ---
 name: open-projects
-description: Generate or refresh the centralized open-projects rollup at /aiconversations/0-project.md by walking every aiconversations/**/*-tasks.md file, extracting each file's "Summary of Open Projects" section, and assembling a domain → conversation → project view of all currently-open project work across the repo. The rollup is a derived view; the -tasks.md files remain canonical detail. Use when refreshing the project-state surface, after significant project work has landed, during a session-start orientation, or as part of the quarterly maintenance review.
+description: Generate or refresh the centralized open-projects rollup at /aiconversations/0-project.md by walking every aiconversations/**/*-tasks.md file, extracting each file's open-projects digest (Summary of Recent Work → Open Projects, or the older Summary of Open Projects), and assembling a domain → conversation → project view of all currently-open project work across the repo. The rollup is a derived view; the -tasks.md files remain canonical detail. Use when refreshing the project-state surface, after significant project work has landed, during a session-start orientation, or as part of the quarterly maintenance review.
 ---
 
 # Open Projects Rollup
@@ -41,7 +41,7 @@ Walk every `aiconversations/**/*-tasks.md` file. Exclude:
 
 ### Step 2 — For each in-scope file, extract project state
 
-Read each file. Look for the "Summary of Open Projects" section (this is the convention prescribed by the AICONFIG.md "Tasks File Structure" guidance — a summary section at the top of every `-tasks.md` listing currently-open projects with status and next action).
+Read each file and find the open-projects digest near the top. **Three formats exist during the June-2026 transition** (AICONFIG.md "Tasks File Structure"), newest first: (1) **current** — a `## Open Projects` section that leads with a `### Summary` subsection (its sibling `## Closed Projects` has its own `### Summary`); (2) a standalone `## Summary of Recent Work` section with an `### Open Projects` subsection; (3) oldest — a single `## Summary of Open Projects` section. Parse the open-projects digest from whichever is present, preferring the newest: `## Open Projects` → `### Summary`, then `## Summary of Recent Work` → `### Open Projects`, then `## Summary of Open Projects`. Only the open digest feeds the rollup body.
 
 For each project found in the summary:
 
@@ -53,7 +53,9 @@ For each project found in the summary:
 - Source file path
 - Source file `lastUpdated` (from frontmatter)
 
-If a file does not have a parseable "Summary of Open Projects" section, capture it as a finding: `<file> — could not parse; reason: <reason>`. Continue with other files; don't abort.
+If a file has none of those open-digest locations (no `## Open Projects` → `### Summary`, no `## Summary of Recent Work` → `### Open Projects`, and no `## Summary of Open Projects`), capture it as a finding: `<file> — could not parse; reason: <reason>`. Continue with other files; don't abort.
+
+**Summary-staleness check (added June 20, 2026; updated for the current format).** While extracting, watch for any project in the **open** digest (the `### Summary` under `## Open Projects`, or an older open-summary location) that is marked complete/closed (a ✅, `[x]`, "Done", "Complete", or "Closed" status on the row). Closed projects legitimately live in the `### Summary` under `## Closed Projects` (or an older closed subsection) — those are expected and are **not** flagged. A completed project in the **open** digest is grooming drift (AICONFIG.md "Tasks File Structure" → grooming rule). Do **two** things: exclude it from the rollup body (it is not open), and capture a cleanup finding: `<file> — open Summary lists a completed project (<project name>); move it to Closed Projects at the source`. This is the corruption the grooming rule exists to prevent; surfacing it here is the safety net.
 
 ### Step 3 — Group by domain → conversation → project
 
@@ -141,6 +143,7 @@ After writing the file, report:
 - Number of `-tasks.md` files scanned
 - Number of projects surfaced in the rollup
 - Number of files that failed to parse (surfaced in "Files needing cleanup")
+- Number of files whose Summary lists a completed project (the staleness check above); these are grooming defects to fix at the source
 - Any conversations where the active-projects list is empty (signal: either the conversation has no open project work, or the file structure prevented parsing)
 
 ### Step 6 — Stop
@@ -158,7 +161,7 @@ A run with format inconsistencies surfaces them as "Files needing cleanup" findi
 - **Don't modify source `-tasks.md` files.** This skill is rollup-only. If `-tasks.md` files need cleanup, that's a separate operation the operator triggers.
 - **Don't overwrite the `## Priority View` section** if the existing `0-project.md` has one. It's a manually-maintained surface (introduced June 17, 2026) carrying the tiered priority outline; this skill preserves it verbatim between regenerations of the domain rollup body. The `prioritize-open-projects` skill is the corresponding generator for that section's content.
 - **Don't include completed projects in the rollup body.** The rollup is "what needs attention." Completed work shows up in the work-status dashboard's status field for the parent conversation, and the source `-tasks.md` files retain the full completed history.
-- **Don't include body-text-derived TODOs.** Only structured "Summary of Open Projects" section content counts. Inline TODOs in conversation bodies are out of scope (future enhancement if needed).
+- **Don't include body-text-derived TODOs.** Only structured open-projects-digest content counts (Summary of Recent Work → Open Projects, or the older Summary of Open Projects). Inline TODOs in conversation bodies are out of scope (future enhancement if needed).
 - **Don't try to infer staleness.** Surface `lastUpdated` per row; let the operator (or a downstream skill like `conversational-maintenance-review`) decide what to flag as stale.
 
 ## Common adaptations

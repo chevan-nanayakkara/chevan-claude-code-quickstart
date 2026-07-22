@@ -8,6 +8,40 @@ The version here tracks this starter's content evolution. It is independent of t
 
 ---
 
+## [1.10.0] — 2026-07-22
+
+### Changed
+
+**Tasks File Structure standard restructured (June 20, 2026 second revision + July 22, 2026 Priority-order convention added).** The prior four-section layout (Summary of Open Projects / Notes/Reference / Open Projects / Closed / Completed Projects) is replaced with a cleaner five-item layout:
+
+1. YAML frontmatter
+2. Title and header information
+3. **Open Projects** — leads with `### Summary` subsection + NEW `### Priority order (AI-maintained recommendation)` subsection + per-project detail blocks
+4. **Closed Projects** — leads with `### Summary` subsection + detail blocks (renamed from "Closed / Completed Projects")
+5. **Notes / Reference** — at the end (moved from position 2; renamed from "Notes/Reference")
+
+Section-name simplifications: `Closed / Completed Projects` → `Closed Projects`; `Notes/Reference` → `Notes / Reference`. Each of Open Projects and Closed Projects now leads with its own focused `### Summary` subsection instead of a single standalone summary section — keeps open-vs-closed digests separate.
+
+**New: `### Priority order (AI-maintained recommendation)` subsection (July 22, 2026 convention).** Sits under Open Projects right below `### Summary`. Carries the AI's current recommended ranking of the file's open projects — a durable answer to "if I picked up this thread cold, what should I work on first?"
+
+- Item-level provenance markers: `*(AI)*` (AI-ranked; free to re-rank on next groom) or `*(operator)*` (manually set; preserved verbatim on subsequent groomings). Unmarked = treated as `*(AI)*` for backward compat.
+- Bounded write scope: AI writes to only this subsection during grooming. Everything else in Open Projects, all of Closed Projects, and all of Notes / Reference stays operator-authoritative.
+- Convention originated in workspace-chevan July 22, 2026; also in chevan-content AICONFIG.md (July 22 same-day port); this v1.10.0 release ships it into the public starter.
+
+**New grooming rule — move the row Open→Closed on close (the most commonly missed step).** When a project completes, in the same edit move its row from `Open Projects → ### Summary` to `Closed Projects → ### Summary` AND migrate its detail block. Prevents the corruption where a completed project stays listed as if open — which the open-projects skill would then propagate into the hub rollup.
+
+**`operations/cwos/skills/open-projects/SKILL.md` updated** to understand three tasks-file formats during transition (newest first: current `## Open Projects → ### Summary`, intermediate `## Summary of Recent Work → ### Open Projects`, oldest `## Summary of Open Projects`). Prefers newest when parsing. New Step 2 summary-staleness check: watches for completed items in the open digest and captures them as cleanup findings (safety net for the grooming rule above).
+
+### Notes
+
+This v1.10.0 release closes the standard-parity gap between chevan-content and chevan-quickstarts that had been flagged since June 20. Workspace-chevan is separately maintained (its own hub, not part of the chevan-content/chevan-quickstarts cluster) — the same standard already applies there.
+
+Bumped MINOR per SemVer (behavioral standard change; backward-compatible parsing via the three-format tolerance in the skill).
+
+Driving conversation: chevan-content `aiconversations/_system/operations/conversational-work-operations-conversation.md` (entry 2026-07-22 5:06PM refresh batch).
+
+---
+
 ## [1.9.0] — 2026-06-17
 
 ### Added
