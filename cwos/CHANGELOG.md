@@ -42,7 +42,28 @@ The "Why this section order" paragraph at the end of the same section still call
 
 ### Notes
 
-Version `1.12.0` is deliberately unused here. It is reserved upstream for the handoff-lane port (`handoff-protocol.md` plus the `handoff-write` / `handoff-inbox` / `spoke-cold-start` skills), which has not shipped into this starter yet. Reserving rather than renumbering keeps this starter's release numbers aligned with the upstream release plan.
+Released before `1.12.0`, which was reserved at the time for the handoff-lane port and shipped later the same day. The out-of-sequence ordering is deliberate: reserving the number rather than renumbering kept this starter's releases aligned with the upstream release plan.
+
+---
+
+## [1.12.0] — 2026-09-07
+
+### Added
+
+**The cross-surface handoff lane, genericized.** Four artifacts that let an operator running AI sessions in more than one repository move work between them as durable files rather than chat messages. Ported from the upstream reference implementation and stripped of its ecosystem: no hub or spoke names, no cross-repo relative paths, no incident history.
+
+- **New reference doc: `operations/cwos/reference/handoff-protocol.md`.** Surface taxonomy (`hub`, `<spoke>-cli`, browser surfaces, and the prefix convention for other AI tools), the `YYYY-MM-DD-HHMM-<from>-to-<to>.md` filename convention, the YAML frontmatter spec, and the routing rule. Opens with a `{{HUB_REPO}}` / `{{HUB_PATH}}` / `{{HANDOFF_DIR}}` configuration block; the three skills read their paths from here rather than hard-coding them.
+- **New skill: `handoff-write`.** Interactive authoring. Gathers the frontmatter fields, computes the filename and destination, and writes a structured body (Context / The ask / Standing rules / Return handoff / Origin).
+- **New skill: `handoff-inbox`.** Read-only companion. Lists handoffs addressed to the current session's surface and not yet answered, auto-detecting the surface from the working directory. Frontmatter-first parse with a filename fallback; reply-tracking via `in-reply-to` where present, explicitly labeled heuristic where not.
+- **New skill: `spoke-cold-start`.** Orientation for a session running in a spoke or development repo, and the narrow counterpart to `cwos-cold-start`. Loads the behavioral charter, the handoff protocol, and this surface's inbox, then deliberately stops. Registered in the existing Session orientation lane; the two handoff skills get a new **Cross-surface handoffs** lane in `skills/README.md`.
+
+**The rule the lane exists to enforce:** a handoff lands in the receiver's inbox, except when the receiver is a shared code repository, in which case it stages hub-side. The reference doc argues the case rather than just stating it, because both simpler formulations are wrong in opposite directions — "hub-side always" strands hub-to-hub handoffs where the receiver never looks, and "receiver's inbox always" pushes one operator's workflow artifacts into repositories that collaborators, other organizations, and future maintainers read.
+
+### Notes
+
+**No memory file ships with this lane.** Upstream, the routing rule is also carried as `operations/cwos/memory/feedback_handoff_prompts_are_files.md`. This starter's `operations/cwos/memory/README.md` states that only templates live here and that real memory content is per-repo, so shipping a populated `feedback_*.md` would break that policy. Instead, `handoff-protocol.md` carries the full text of the memory an adopting repo should create, under **Recommended companion memory**, with a note to index it in `MEMORY.md`. The rule reaches the always-loaded layer without the starter contradicting itself.
+
+**Frontmatter gained a `supplements:` field** not present upstream. It came out of using the protocol: a handoff that has already been sent must not be edited, because sender and receiver then hold different documents with no way to tell. A supplement is a new file that names what it extends.
 
 ---
 
