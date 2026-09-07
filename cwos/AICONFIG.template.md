@@ -249,7 +249,26 @@ Every `-tasks.md` file uses this layout, in this order. (Format current as of Ju
 2. **Title and header information** — companion conversation pointer, reference pointers, anything orienting.
 3. **Open Projects** — leads with a `### Summary` subsection (one-line digest per open project: number, name, status, key dependency or next-action signal; bullets, not a table per the no-markdown-tables rule), followed by a `### Priority order (AI-maintained recommendation)` subsection (ranked list of the open projects with rationale per position; see the Priority-order convention below), then one detail block per open project. The Deferred backlog lives here too.
 4. **Closed Projects** — leads with a `### Summary` subsection (recently closed projects, most recent first), then the detail blocks. Append-only; do not prune. (Covers both completed-with-delivery and closed-without-completion.)
-5. **Notes / Reference** — at the end: catch-all for context the work depends on (session-starter prompts, key file pointers, design decisions, glossary entries, links to ADRs / decision logs / sibling conversations). The "what an operator needs to know to engage" reference shop. Living document; prune as projects close out.
+5. **Notes / Reference** — at the end: **pointers only.** Session-starter prompts, file paths, links to ADRs / decision logs / sibling conversations, a glossary entry where a term needs disambiguating. It says *where to look*, not *what is true*. Living document; prune as projects close out.
+
+**Notes / Reference holds no content.** This is the rule most often broken, and it is usually broken by permissive wording in the standard itself: describe this section as a "catch-all for context the work depends on" or a "reference shop" and it will license far more than its own examples show. Reference material accumulates here because this is the file that happens to be open when it shows up, not because it belongs here.
+
+**The test: close every project in the file. What is left standing?**
+
+Anything still standing was never project state. A checkbox, a phase marker, a priority ranking, a closure record, a dependency note: all of these die with the project that owns them. A reading list, a lab value, an enrollment figure, a set of talking points for a meeting: none of these care whether a project exists.
+
+Said another way: **orchestration content changes when the work moves; reference content changes when the world moves.** A `-tasks.md` file holds only the first kind.
+
+**Where the content goes instead — four destinations:**
+
+- **The companion domain folder** — the path in the conversation file's `companionTo` frontmatter field. Domain reference content, and the overwhelming majority case. A reading list goes to the domain folder for that hobby; recurring measurements go to that domain's `data/` folder; roles and headcount go to the folder for that business or property. The routing target is already declared in every conversation file; the pointer exists and has simply never been used as a routing rule.
+- **The conversation file** — reasoning. Chronological, append-only. Why a decision was reached, what an option traded off.
+- **`operations/cwos/memory/decisions/`** — decisions with alternatives and consequences, as ADRs.
+- **`operations/cwos/reference/`** — durable procedure and specification that is none of the above: not a behavioral rule, not state, not reasoning, not a decision. A protocol document, a taxonomy, a design spec for an unbuilt subsystem.
+
+**The five `##` sections above are the complete permitted set.** No preamble sections above Open Projects, no appendix sections below Notes / Reference. A strategy briefing sitting on top of a project tracker, or a design specification interleaved between two projects, is the same defect as an overstuffed Notes / Reference wearing a different heading level.
+
+**Companion rule for conversation files.** The same principle governs the conversation file: when substantial structured content accumulates there beyond the dialogue itself — a table someone will look up later, a spec, a compiled list — extract it to its proper destination above and leave a pointer in its place. One rule, two files. **Each of the three files (conversation, tasks, domain reference) holds one kind of thing, and reference material belongs to none of the first two.**
 
 No Status Key legend block: `[ ]` / `[x]` checkboxes are self-evident; any non-standard marker is explained inline where used.
 
@@ -304,7 +323,7 @@ Each entry should include:
 - File references (paths to deliverables, specs, or artifacts produced)
 - Reason for closure if not completed-with-delivery (e.g., scope shift, deprioritized, blocked indefinitely)
 
-**Why this section order:** giving each of Open and Closed its own `### Summary` keeps each digest focused and relevant (open summary = open work only; closed summary = closed work only), instead of one mixed standalone summary. Open Projects leads because it is the live work; Closed Projects is the historical record; Notes / Reference, the stable reference shop, sits at the end out of the way of the active work.
+**Why this section order:** giving each of Open and Closed its own `### Summary` keeps each digest focused and relevant (open summary = open work only; closed summary = closed work only), instead of one mixed standalone summary. Open Projects leads because it is the live work; Closed Projects is the historical record; Notes / Reference, the pointer index, sits at the end out of the way of the active work.
 
 This structure scales from single-project tasks files to multi-project tracking while keeping the summary scannable and the detail organized.
 

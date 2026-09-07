@@ -8,6 +8,25 @@ The version here tracks this starter's content evolution. It is independent of t
 
 ---
 
+## [1.14.0] — 2026-09-07
+
+### Changed
+
+**Tasks-file standard: Notes / Reference is now pointers only.** `AICONFIG.template.md` `#### Tasks File Structure (Standard)` item 5 previously described this section as a "catch-all for context the work depends on" and a "reference shop" while every example it gave was a pointer. That wording is what licensed the drift it now forbids: an upstream survey of 32 `-tasks.md` files found roughly eight holding genuine reference content, meaning those files were following the standard rather than breaking it. Every repo bootstrapped from this template inherited the same leak, so the fix lands at the source.
+
+- **Pointers only**, stated as a prohibition rather than a preference, with the section's job restated as *where to look, not what is true*.
+- **The diagnostic travels with the rule:** close every project in the file; whatever is left standing was never project state.
+- **The distinction named:** orchestration content changes when the work moves, reference content changes when the world moves. A `-tasks.md` file holds only the first kind.
+- **Four-destination routing** for content that does not belong: the companion domain folder (via the `companionTo` frontmatter field every conversation file already carries), the conversation file for reasoning, `operations/cwos/memory/decisions/` for ADRs, `operations/cwos/reference/` for durable procedure and specification.
+- **The five `##` sections are declared the complete permitted set** — no preamble above Open Projects, no appendix below Notes / Reference. A strategy briefing on top of a project tracker is the same defect wearing a different heading level.
+- **Companion rule for conversation files** stated inline: when substantial structured content accumulates beyond dialogue, extract it and leave a pointer. Each of the three files holds one kind of thing.
+
+### Fixed
+
+The "Why this section order" paragraph at the end of the same section still called Notes / Reference "the stable reference shop," contradicting the rule above it. Reworded to "the pointer index."
+
+---
+
 ## [1.13.0] — 2026-09-07
 
 ### Added
