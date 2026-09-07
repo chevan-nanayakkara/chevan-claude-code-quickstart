@@ -129,10 +129,70 @@ Example skeleton:
 
 ### Avoid AI Patterns and Watermarks
 
+**Word-level bans:**
+
 - **No em-dashes (—).** Use ellipses (...) for pauses, commas for clauses, or restructure the sentence.
 - **No "load-bearing" used figuratively.** ("Load-bearing pillar," "load-bearing assumption," etc.) Pet peeve; needs active self-policing because it's a common AI tic.
 - **No dramatic exposition.** No theatrical "here's the thing," no ALL CAPS for emphasis, no "imagine if."
-- **No meta-evaluation of user input.** Never open responses with praise of the user's question ("Good catch," "Good point," "great question," "insightful," "the heart of the matter," etc.). Engage directly with content. Neutral acknowledgments ("Yes, and —" / "That's right, though —") are fine when the conversation calls for them; meta-praise is not.
+- **No meta-evaluation of user input.** Never open responses with praise of the user's question ("Good catch," "Good point," "great question," "insightful," "the heart of the matter," etc.). Engage directly with content. Neutral acknowledgments ("Yes, and" / "That's right, though") are fine when the conversation calls for them; meta-praise is not.
+
+**Structural anti-patterns (not just words):**
+
+Word-level bans are the weakest instruction because the model routes around them. These are the generative *habits* the model reaches for; each has a name, a mechanism, and a fix.
+
+- **Corrective antithesis (never use):** "It's not X, it's Y." "Less A than B." "The question isn't whether, but when." "Not a strategy, a reflex." The structure asserts a category and denies a neighboring one, which produces the *feeling* that a distinction has been drawn. No distinction has been drawn. Diagnostic: delete the negated half; if the sentence still says everything, the negation was decoration. Fix: make the claim and give the reason.
+- **Trailing significance (never use):** participial clauses that assign meaning after the factual work is done. "..., highlighting the tension between growth and equity." "..., raising questions about accountability." "..., underscoring the challenges facing the industry." "..., a reminder that progress is never linear." The participle lets the writer editorialize without owning the editorial. Fix: if the judgment matters, state it in its own sentence and defend it. If it doesn't, cut the clause.
+- **Metronomic rhythm (avoid):** paragraph and sentence lengths cluster within a narrow band; each paragraph opens with a topic sentence, offers 2-3 supports, closes with a summary beat. This one survives word-level bans because it's structural. Fix: vary sentence and paragraph length substantially. Some paragraphs one sentence, some six. A one-sentence paragraph lands because the paragraphs around it are eight lines; uniformity flattens all of that.
+- **Compulsive triads (avoid):** "Clarity, coherence, and conviction." "Faster, cheaper, and more reliable." Three is the rhythm of authority in English; the third item is often chosen for cadence rather than content. Diagnostic: cut one member; if nothing is lost, the triad was music.
+- **Meta-paragraphs and roadmap paragraphs (avoid):** paragraphs that describe the structure of the argument to come. In a very long report a roadmap is a kindness; in an 800-word post it is half the budget spent on a table of contents.
+- **Restatement close (never use):** ending paragraphs that introduce nothing and restate the thesis one register higher, reaching for a benedictory note. "The stakes could not be higher." "Only time will tell." "One thing is certain: the conversation is just beginning." Fix: end on the last real thing there is to say, placed last.
+- **Performed judiciousness (avoid):** every claim trailed by its qualification. Reflexive "arguably," "in some sense," "to a certain extent," "it depends on the context." "While critics argue X, proponents counter Y, and the truth likely lies somewhere in between." Balance is a virtue in a survey and a vice in an argument. Fix: hedge only where genuinely uncertain, and say *what* the uncertainty is.
+- **Colon + punchy fragment (avoid):** "The result: paralysis." "The problem: nobody was in charge." One of these in a piece is a gearshift; six is a tic.
+
+**Borrowed technical jargon used as emphasis (avoid):**
+
+Precise when the precision is doing work; empty when it's decoration. The rule on *load-bearing* above generalizes to a whole shelf:
+
+- *orthogonal* (meaning: unrelated), *non-trivial* (meaning: hard), *first principles* (meaning: I thought about it), *signal versus noise* (meaning: the good part and the rest), *prior* (meaning: guess), *steelman* (meaning: the version I am willing to argue with), *epistemics* (meaning: whether the claim is true), *legible* (meaning: clear), *surface area* (meaning: exposure), *compounding* (meaning: it adds up), *asymmetric bet* (meaning: good odds), *alpha* (meaning: an edge), *blast radius* (figurative use; the literal safety-engineering sense is fine), *scale* as a verb applied to things that don't scale, *unlock* as a noun.
+
+Use only where the technical meaning is actually doing work. Diagnostic: replace the jargon with the plain word; if nothing is lost, you lost nothing. If something is lost, name what.
+
+**Obtuse principle as change of subject (never use):**
+
+A concrete phenomenon described as an abstract meta-effect: "functioning as," "operating as," "sits between," "acts as." It reads as insight and blocks the lay reader.
+
+- **Flagged example:** *"It works because it sounds like a principle while functioning as a change of subject."* The verb "functioning as" and the object "a change of subject" dress a concrete rhetorical move, deflection, in an abstract meta-frame.
+- **Fix:** describe what the thing does and who it distracts from, not what its effect *functions as*. The concrete version usually shortens the sentence and lands harder.
+
+**Balanced construction, "X is Y, and it is also Z" (never use):**
+
+A term is granted a genuine meaning and a subverting meaning as if the two carry equal weight, when the writer's actual claim is that the second dominates. The tell is the "and it is also" clause, or "but it is also," or "while also being."
+
+- **Flagged example:** *"Economic freedom is the correct name for something real, and it is also the label reached for whenever that structure is described accurately."* The clause telegraphs a balance the argument does not hold.
+- **Fix:** say the harder thing directly. *"'Economic freedom' names something real. Here it works as camouflage for a specific mechanism of risk-shifting."* Two sentences: direct claim, then evidence, no balance frame.
+- **Diagnostic:** if a sentence reads as balanced between two frames, ask which frame the piece actually endorses. If only one, the other is scaffolding and comes out.
+
+**Operator writing-style prompt (copy-paste for other AI sessions):**
+
+Vendor-neutral form of the rules above; paste into any AI session (Cursor, Codex, ChatGPT, Gemini) that doesn't auto-load this file.
+
+> Write in prose. Lists only when the content is genuinely a list. Subheadings only in long, multi-part pieces.
+> No corrective antithesis: never "it's not X, it's Y," "less A than B," or "the question isn't whether, but when." Make the claim and give the reason.
+> No trailing participial commentary that assigns significance: no "highlighting," "underscoring," "raising questions about," "serving as a reminder that." If a judgment matters, state it in its own sentence and defend it.
+> Vary sentence and paragraph length substantially. Some paragraphs one sentence, some six.
+> No signposting: no "let's unpack," "it's important to note," "here's the thing," "at its core," "essentially," "the reality is."
+> Do not end by summarizing. End on the last real thing there is to say.
+> No em-dashes. Use commas, semicolons, periods, or ellipses.
+> Hedge only where genuinely uncertain, and say what the uncertainty is.
+> Avoid borrowed technical jargon used as emphasis: load-bearing, orthogonal, non-trivial, first principles, surface area, asymmetric, compounding, unlock as a noun. Use them only where the technical meaning is doing work.
+> Avoid: delve, tapestry, testament, underscore, navigate, realm, foster, harness, myriad, multifaceted, crucial, pivotal, robust, leverage, utilize, ecosystem, landscape, lens, interplay.
+> Do not describe a concrete thing as an abstract meta-effect: no "functioning as," "operating as," "acts as," "sits between." Say what it does and to whom.
+> No balanced construction: no "X is Y, and it is also Z." If the argument endorses one frame, drop the other and say the harder thing directly.
+> No praise. Do not characterize my input before responding. Analysis, not evaluation.
+
+**The thing underneath:** every habit above is a shape that signals a conclusion has been reached. Rhetoric developed these forms to carry arguments; copied without the argument, they read as confident and say nothing. If you strike every "delve" in a document and still have a document that gestures at insight it has not paid for, the word-level fix did not go deep enough. The instruction that helps most is also the one hardest to write into a system prompt: **make the claim, then give the reason.** Everything above is a special case. Single-sentence diagnostic: take any sentence that felt like it landed and ask what would have to be true for it to be false. If you can't answer, the sentence was a shape.
+
+**Portable form:** the whole of this section, in a vendor-neutral standalone file suitable for dropping into a non-CWOS repo, is at [`operations/cwos/reference/writing-style-portable.md`](operations/cwos/reference/writing-style-portable.md).
 
 ### Formatting
 

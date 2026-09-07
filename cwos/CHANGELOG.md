@@ -8,6 +8,25 @@ The version here tracks this starter's content evolution. It is independent of t
 
 ---
 
+## [1.13.0] — 2026-09-07
+
+### Added
+
+**Writing-style standards ported from the upstream reference implementation.** `AICONFIG.template.md` `### Avoid AI Patterns and Watermarks` grew from four word-level bullets to the full standard, and the same content ships in standalone vendor-neutral form as `operations/cwos/reference/writing-style-portable.md`.
+
+- **Structural anti-patterns** — eight named generative habits with a mechanism and a fix each: corrective antithesis, trailing significance, metronomic rhythm, compulsive triads, meta/roadmap paragraphs, restatement close, performed judiciousness, colon-plus-fragment. The framing that motivates them: word-level bans are the weakest instruction because the model routes around them.
+- **Borrowed technical jargon used as emphasis** — the existing figurative `load-bearing` ban generalized to a shelf of fourteen terms, each glossed with the plain word it is standing in for, plus the substitution diagnostic.
+- **Obtuse principle as change of subject** and **balanced construction ("X is Y, and it is also Z")** — two AI-cadence patterns surfaced August 28, 2026 in the upstream hub and codified there September 7, 2026. Each ships with a flagged example, a fix, and (for the second) a diagnostic.
+- **Operator writing-style prompt block** — a vendor-neutral copy-paste form of the whole section for AI sessions that do not auto-load `AICONFIG.md` (Cursor, Codex, ChatGPT, Gemini), including the two lines for the new patterns above.
+- **"The thing underneath"** — the closing frame explaining why each habit above is a shape that signals a conclusion has been reached, with the single-sentence falsifiability diagnostic.
+- **New reference doc:** `operations/cwos/reference/writing-style-portable.md`, registered in that folder's `README.md`. Drop-in for non-CWOS repos as `WRITING-STYLE.md`, referenced from whatever config file the target repo's AI tool reads.
+
+### Notes
+
+Version `1.12.0` is deliberately unused here. It is reserved upstream for the handoff-lane port (`handoff-protocol.md` plus the `handoff-write` / `handoff-inbox` / `spoke-cold-start` skills), which has not shipped into this starter yet. Reserving rather than renumbering keeps this starter's release numbers aligned with the upstream release plan.
+
+---
+
 ## [1.11.0] — 2026-08-07
 
 ### Added
