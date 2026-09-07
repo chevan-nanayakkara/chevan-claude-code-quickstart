@@ -8,6 +8,31 @@ The version here tracks this starter's content evolution. It is independent of t
 
 ---
 
+## [1.11.0] — 2026-08-07
+
+### Added
+
+**New skill: `document-export`.** Convert a self-contained HTML design-document bundle (`*.dc.html` + `_ds/` design system + `assets/` + `uploads/`) into an email-ready PDF and a Google-Docs-friendly `.docx`. Ships with a bundled `scripts/` toolkit (~900 lines Python + Lua) — the first `scripts/`-bundled skill in this starter.
+
+- Two render paths: **PDF** via headless Chrome + Ghostscript compression; **docx** via pandoc + a brand reference.docx + a lua filter for anchor stripping.
+- Codifies **seven silent-failure modes** with cause and fix:
+  1. Word style-level `w:tblBorders` is honored by Word but discarded by Google Docs on import → borders must be written as direct formatting onto every table and cell.
+  2. Every HTML-to-docx converter emits heading anchor ids that become Word bookmarks, which Docs renders as stray markers → strip ids during conversion (`filter.lua`).
+  3. Bundle fonts are `@font-face` in the design system; Chrome renders them but Word cannot embed URLs → localize the fonts into a system-installable folder before rendering.
+  4. Chrome print media crops narrow images at print-page width → normalize `<img>` extents in `prep_html.py`.
+  5. Design-system callouts render via CSS gradients + JavaScript web components → `prep_html.py` transforms the light DOM into pandoc-friendly markup before conversion.
+  6. Ordered lists show as run-together numbers when the design-system stylesheet is preserved intact → strip the numbered-list rules from the localized CSS.
+  7. Two-column contents grid loses one column in Word → collapse to a single ordered list during prep.
+- **Brand-as-config** pattern: `scripts/brand.example.json` is a neutral placeholder. Copy to `brand.<project>.json` and derive colors from the bundle's own `_ds/*/tokens/colors.css` (rgba tints flattened against white first).
+- Ports the skill authored in `chevan-content` on August 6-7, 2026 (driving conversation: `aiconversations/business/msslc-transformation-conversation.md`), scripted, verified against a real bundle (paragraph styles / character styles / bookmark count / table count / borders / list numbering / image extents / declared fonts / header-footer parts all reproducible), then genericized for public reuse.
+- `scripts/prep_html.py`'s transforms are pattern-matched against the Claude design-document export family (`<doc-page>` light DOM, `slot="header"`, `<sc-if>`, swatch spans, two-column contents grid). Each transform no-ops harmlessly when its pattern is absent, so the toolkit is safe on other bundles, just less useful.
+
+Registered in `cwos/operations/cwos/skills/README.md` under a new **Document production** lane; the `README.md` file version bumped to reflect the new skill.
+
+Chevan-content's skills index (v1.2.0, August 7) is the source-of-truth registration; this starter mirrors the lane structure.
+
+---
+
 ## [1.10.0] — 2026-07-22
 
 ### Changed

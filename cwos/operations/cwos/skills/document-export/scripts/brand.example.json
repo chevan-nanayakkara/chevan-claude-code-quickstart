@@ -1,0 +1,18 @@
+{
+  "_comment": "Neutral example brand config. Copy to brand.<your-project>.json and derive colors from the bundle's _ds/*/tokens/colors.css (flatten rgba() tints against white first).",
+  "bodyFont": "Open Sans",
+  "headFont": "Roboto",
+  "accent": "2A6BB5",
+  "text": "222222",
+  "muted": "6B6B6B",
+  "calloutFill": "EEF3FA",
+  "quoteFill": "F5F8FC",
+  "rule": "D5DEEA",
+  "tableGrid": "B7C4D4",
+  "tableHeadGrid": "6E86A5",
+  "tableHeadFill": "DDE6F2",
+  "headerLeft": "Organization Name",
+  "headerRight": "Document Title",
+  "footerLeft": "Document footer left",
+  "footerRight": "Document footer right"
+}
