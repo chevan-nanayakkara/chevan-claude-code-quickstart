@@ -8,6 +8,33 @@ The version here tracks this starter's content evolution. It is independent of t
 
 ---
 
+## [1.15.0] — 2026-09-07
+
+### Fixed
+
+**`document-export` crashed on any bundle containing an SVG.** `prep_html.py`'s `convert_images()` called `Image.open()` on every `<img>` source. Pillow is a raster library, so a vector source raised `UnidentifiedImageError`, which propagated out and took the entire .docx path down: not a degraded document, no document. Any bundle whose logo is an SVG hit it, which is most bundles that have a logo. The skill's other eight failure modes all fail silently; this one was the loud one, and the only defect that produced no output at all.
+
+- **New module-level `VECTOR_EXTS = (".svg", ".svgz", ".eps", ".pdf")`**, sitting with the other tuning constants and carrying the reason in a comment.
+- **A guard in `repl()`, placed after the existing `img/` check** so already-built assets still pass through untouched. Matching is case-folded, because a bundle carrying `LOGO.SVG` should not slip through.
+- **Dropped loudly, not silently.** Each dropped file is named on stderr after the `images:` line, with the note that the PDF path is unaffected (Chrome renders vectors natively) and the remedy: export to PNG and repoint the tag. A silent drop would have made this the ninth silent failure in a skill whose premise is that silent failures are the enemy.
+- **`SKILL.md` records it as a ninth failure mode**, with the section heading changed from "each of these fails silently" to "eight silent, one loud" and a paragraph stating that this one is the opposite shape from the other eight. A reader skimming the list would otherwise assume it is uniformly about silent corruption.
+
+### Added
+
+**Ghostscript alias note** in `document-export`'s PDF procedure. `gs` is a two-letter command and a common alias target, so an alias can shadow the binary and make the compression step read as "Ghostscript is not installed." Resolve the real path with `command -v gs`. Stated as the general case, not as one machine's configuration.
+
+### Changed
+
+**The handoff lane now states where handoffs live rather than naming a scratch path.** `handoff-protocol.md`'s `{{HANDOFF_DIR}}` definition shipped in 1.12.0 pointing at `working/cwos-handoffs`. Handoffs are the durable record of what a receiving surface was told and what it returned, and they routinely stay live for weeks, so the "this is scratch" framing was wrong. The definition now states the convention first — handoffs belong in the operations layer, one folder per project, alongside `memory/`, `skills/`, and `reference/` — and gives `operations/cwos/handoffs/<project>/` as what that means in a CWOS repository, with an explicit warning against filing them under `working/`.
+
+The starter needed the change in one place only. Every other consumer (`handoff-write`, `handoff-inbox`, `spoke-cold-start`, the skills README) already reads `{{HANDOFF_DIR}}` from the reference doc rather than hard-coding a literal, which is what the 1.12.0 genericization bought.
+
+### Notes
+
+**`CWOS.md`'s hub-repo structure tree still lists three operations folders** (`memory/`, `skills/`, `reference/`) and does not include `handoffs/`. Deliberately unchanged here: that tree is the portable spec, and the upstream reference implementation holds the pen on it. The spec catches up after the starter does, in that order.
+
+---
+
 ## [1.14.0] — 2026-09-07
 
 ### Changed

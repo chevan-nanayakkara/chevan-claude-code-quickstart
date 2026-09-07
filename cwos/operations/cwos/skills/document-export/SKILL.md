@@ -28,7 +28,7 @@ Preconditions: Chrome (or Edge), Ghostscript, Pandoc, Python with Pillow. LibreO
 
 **Never edit the source bundle.** Copy it to a scratch build directory and transform the copy. The operator's folder stays pristine and re-runnable.
 
-**Never trust the conversion.** Every failure mode below produces a file that opens fine and is quietly wrong. Render the result back to images and read it.
+**Never trust the conversion.** Eight of the nine failure modes below produce a file that opens fine and is quietly wrong. Render the result back to images and read it. The ninth (vector images) is the exception that announces itself, and is described where it sits in the list.
 
 ## Procedure — PDF
 
@@ -51,6 +51,8 @@ Preconditions: Chrome (or Edge), Ghostscript, Pandoc, Python with Pillow. LibreO
 
 5. **Compress with Ghostscript** — 150 dpi color/gray, DCT-encoded, duplicate-image detection, fonts kept embedded. Typically an 85-90% reduction, which is what makes it emailable.
 
+   `gs` is a two-letter command and a common alias target, so a shell alias can shadow the binary and the compression step then fails in a way that reads as "Ghostscript is not installed." Resolve the real path with `command -v gs` and invoke that.
+
 6. **Verify** per the checklist below.
 
 ## Procedure — .docx
@@ -70,7 +72,7 @@ Preconditions: Chrome (or Edge), Ghostscript, Pandoc, Python with Pillow. LibreO
 
 5. **Verify** per the checklist below.
 
-## Failure modes — each of these fails silently
+## Failure modes — eight silent, one loud
 
 **Bookmarks.** Every HTML→docx converter generates an anchor id per heading, and each becomes a Word bookmark that Google Docs renders as a stray marker. The Lua filter strips identifiers from headings, divs, spans, tables, figures, cells, and rows. Verify zero `w:bookmarkStart` in `word/document.xml`.
 
@@ -87,6 +89,10 @@ Preconditions: Chrome (or Edge), Ghostscript, Pandoc, Python with Pillow. LibreO
 **Multi-part figures.** A `<figure>` holding label + image + caption makes pandoc emit a two-column figure table, halving every image. `prep_html.py` hoists the label out. Related: pandoc sizes images from the `width` attribute in px (inline `style` widths are ignored), so images are saved at 96 dpi and given explicit pixel widths, with the source's max-height honored so tall plates still fit a page.
 
 **List marker color.** Markers take formatting from the paragraph mark, not the runs, so an accent color needs an `rPr` inside each list paragraph's `pPr`. Handled by `post_process_docx.py`.
+
+**Vector images crash the .docx path.** Pillow is a raster library. `prep_html.py` opened every `<img>` source with it, and an SVG raises `UnidentifiedImageError`, which propagated out and took the whole .docx build down: not a degraded document, no document. Any bundle whose logo is an SVG hits this, which is most bundles that have a logo. `prep_html.py` now drops `.svg` / `.svgz` / `.eps` / `.pdf` sources from the .docx input and names each dropped file on stderr. The PDF path is unaffected, since Chrome renders vectors natively; to keep a vector in Word, export it to PNG and repoint the tag.
+
+**That last one is the opposite shape from the eight above.** They produce a file that opens fine and is quietly wrong. This produced no file at all, and after the fix it produces a correct file with a stated omission. The drop is reported loudly on purpose: a missing logo the operator was never told about would just be the ninth silent failure.
 
 ## Brand configuration
 

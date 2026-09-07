@@ -22,6 +22,13 @@ import brand as brand_mod
 MAX_IMAGE_HEIGHT_IN = 7.4   # leaves room for a caption on the same page
 LOGO_WIDTH_PX = 256
 
+# Pillow is a raster library and raises UnidentifiedImageError on vector input,
+# which took the whole .docx path down on any bundle carrying an SVG logo. Chrome
+# renders vectors natively, so the PDF path is unaffected — only Word loses them.
+# Dropped loudly rather than silently: a missing logo the operator was not told
+# about is worse than one they were.
+VECTOR_EXTS = (".svg", ".svgz", ".eps", ".pdf")
+
 
 def cut_balanced(text, open_pattern):
     """Remove a <div ...>...</div> block matched by open_pattern, counting nesting."""
@@ -119,6 +126,7 @@ def convert_images(text, bundle_dir, build_dir, column_px):
     as PNG for transparency, and normalize everything to 96 dpi so the width
     attribute maps 1:1 to the display size pandoc computes."""
     seen = {}
+    dropped = []
 
     def convert(rel):
         im = Image.open(os.path.join(bundle_dir, rel))
@@ -153,6 +161,9 @@ def convert_images(text, bundle_dir, build_dir, column_px):
         tag, rel = m.group(0), m.group(1)
         if rel.startswith("img/"):                        # already-built asset
             return tag
+        if rel.lower().endswith(VECTOR_EXTS):             # Pillow cannot open these
+            dropped.append(rel)
+            return ""
         if rel not in seen:
             seen[rel] = convert(rel)
         out, width = seen[rel]
@@ -164,6 +175,14 @@ def convert_images(text, bundle_dir, build_dir, column_px):
     text = re.sub(r'<img[^>]*src="([^"]+)"[^>]*>', repl, text)
     total = sum(os.path.getsize(os.path.join(build_dir, o)) for o, _ in seen.values())
     print("images: %d re-encoded, %dKB total" % (len(seen), total // 1024))
+    if dropped:
+        print("vector images: %d dropped from the .docx (Pillow cannot open them):"
+              % len(dropped), file=sys.stderr)
+        for rel in dropped:
+            print("  %s" % rel, file=sys.stderr)
+        print("  the PDF path is unaffected; Chrome renders vectors natively.\n"
+              "  to keep them in Word, export each to PNG and repoint the <img> tag.",
+              file=sys.stderr)
     return text
 
 

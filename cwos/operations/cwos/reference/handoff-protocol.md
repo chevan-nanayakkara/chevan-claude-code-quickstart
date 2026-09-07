@@ -10,7 +10,7 @@ This document ships with placeholders. Replace them once, in this file, when the
 
 - **`{{HUB_REPO}}`** — the folder name of your hub repository (the repo where reasoning, conversations, and work tracking live). Example: `my-hub`.
 - **`{{HUB_PATH}}`** — the absolute path to that repo, for sessions running elsewhere. Example: `~/git/personal/my-hub`.
-- **`{{HANDOFF_DIR}}`** — the hub-relative folder handoffs live in. Conventionally `working/cwos-handoffs`, but any stable path works as long as every surface agrees on it.
+- **`{{HANDOFF_DIR}}`** — the hub-relative folder handoffs live in, one subfolder per project. **Handoffs belong in the operations layer**, alongside `memory/`, `skills/`, and `reference/`; in a CWOS repository that is `operations/cwos/handoffs/`, and a handoff for project `x` lands at `operations/cwos/handoffs/x/`. Any stable path works as long as every surface agrees on it, but do not file them under `working/` or another scratch area. Scratch is for material that may not survive. A handoff is the durable record of what a receiving surface was told and what it returned, and handoffs routinely stay live for weeks, which is exactly when someone needs to reread one.
 - **The spoke roster** in the taxonomy section below — replace the example tokens with your own repos.
 
 If you run only one repository and never cross surfaces, you do not need this protocol. It earns its keep the moment a second session in a second repo starts doing work that the first one has to know about.
