@@ -130,7 +130,7 @@ A term is granted a genuine meaning and a subverting meaning as if the two carry
 
 Field-ready form. Paste into any AI session that doesn't auto-load these standards.
 
-> These rules govern prose written in my voice: essays, posts, correspondence, anything with a byline. They do not govern technical documentation — specs, changelogs, commit messages, READMEs — which is written in an institutional register nobody mistakes for a personal voice. Where a draft is heading toward publication, the rules apply wherever it currently lives.
+> These rules govern prose written in my voice: essays, posts, correspondence, anything with a byline. They do not govern technical documentation: specs, changelogs, commit messages, READMEs. That is written in an institutional register nobody mistakes for a personal voice. Where a draft is heading toward publication, the rules apply wherever it currently lives.
 > Write in prose. Lists only when the content is genuinely a list. Subheadings only in long, multi-part pieces.
 > No corrective antithesis: never "it's not X, it's Y," "less A than B," or "the question isn't whether, but when." Make the claim and give the reason.
 > No trailing participial commentary that assigns significance: no "highlighting," "underscoring," "raising questions about," "serving as a reminder that." If a judgment matters, state it in its own sentence and defend it.

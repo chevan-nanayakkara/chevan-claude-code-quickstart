@@ -25,19 +25,13 @@ This subdirectory of [`chevan-quickstarts`](../) is a self-contained CWOS starte
 ### Implementation layer (canonical at `operations/cwos/`)
 
 - **[`operations/cwos/README.md`](operations/cwos/README.md)** — describes the implementation layer itself: the three folders, the conditional fourth (`handoffs/`), and where each kind of content goes. Copy it and replace the deviations section with the target repo's own.
-- **[`operations/cwos/skills/`](operations/cwos/skills/)** — four universal Agent Skills:
-  - `run-prompt-protocol/` — the core run-prompt workflow
-  - `conversation-archiving/` — archive conversation files over 75KB
-  - `cwos-migrate-from-conversational-work/` — clean-break migration from the older predecessor
-  - `_template/` — Agent Skills format scaffold for authoring new skills
-- **[`operations/cwos/reference/`](operations/cwos/reference/)** — four universal reference docs:
-  - `taxonomy.md` — CWOS vocabulary glossary
-  - `conventional-commits.md` — commit message format reference
-  - `agent-skills-standard.md` — Anthropic Agent Skills format spec reference
-  - `mcp-stack.md` — MCP server configuration reference
+- **[`operations/cwos/skills/`](operations/cwos/skills/)** — universal Agent Skills, grouped into lanes: core workflow (run-prompt protocol, conversation archiving, migration from the predecessor), maintenance (detection-only frontmatter and drift sweeps), session orientation (hub and spoke cold starts), project management (open-projects rollup, prioritization, the refresh orchestrator), cross-surface handoffs (authoring and inbox), and document production (HTML bundle to PDF and Word, with a bundled `scripts/` toolkit). Plus `_template/` for authoring new ones. **[`skills/README.md`](operations/cwos/skills/README.md) is the authoritative inventory**, one paragraph per skill.
+- **[`operations/cwos/reference/`](operations/cwos/reference/)** — standing knowledge: CWOS vocabulary, Conventional Commits, the Agent Skills standard, MCP server configuration, the C+E permissions posture, portable writing standards for dropping into non-CWOS repos, and the cross-surface handoff protocol. **[`reference/README.md`](operations/cwos/reference/README.md) is the authoritative inventory.**
 - **[`operations/cwos/memory/`](operations/cwos/memory/)** — templates only:
   - `decisions/_template.md` — ADR template (Architecture Decision Records, Michael Nygard format)
   - `projects/_template.md` — re-entry brief template for project resumption
+
+The two README pointers above are deliberate. Naming every artifact here would put the same list in three places, and the copy that gets forgotten is always the one furthest from the files.
 
 ---
 
@@ -45,7 +39,9 @@ This subdirectory of [`chevan-quickstarts`](../) is a self-contained CWOS starte
 
 ### Pattern 1: Raw GitHub URL fetches (one-off, no clone)
 
-For a target repo where you only need CWOS files once:
+For a target repo where you only need CWOS files once.
+
+**The lists below are a snapshot, not the inventory.** `operations/cwos/skills/README.md` and `operations/cwos/reference/README.md` are authoritative, and Pattern 2 installs everything without anyone maintaining a list. If you take this path, read those two files afterward to see whether anything shipped since.
 
 ```bash
 RAW="https://raw.githubusercontent.com/chevan-nanayakkara/chevan-quickstarts/main/cwos"
@@ -61,16 +57,31 @@ curl -s "$RAW/CLAUDE.template.md" -o CLAUDE.template.md
 mkdir -p operations/cwos
 curl -s "$RAW/operations/cwos/README.md" -o operations/cwos/README.md
 
-# Universal skills (4)
-for skill in run-prompt-protocol conversation-archiving cwos-migrate-from-conversational-work _template; do
+# Universal skills
+for skill in \
+  run-prompt-protocol conversation-archiving cwos-migrate-from-conversational-work \
+  frontmatter-validate conversational-maintenance-review \
+  cwos-cold-start spoke-cold-start \
+  open-projects prioritize-open-projects refresh-work-management \
+  handoff-write handoff-inbox \
+  document-export _template; do
   mkdir -p "operations/cwos/skills/$skill"
   curl -s "$RAW/operations/cwos/skills/$skill/SKILL.md" \
     -o "operations/cwos/skills/$skill/SKILL.md"
 done
 
-# Reference docs (4)
+# document-export ships a scripts/ toolkit; a SKILL.md-only fetch leaves it unusable
+mkdir -p operations/cwos/skills/document-export/scripts
+for f in brand.py brand.example.json build_reference.py filter.lua \
+         localize_fonts.py post_process_docx.py prep_html.py; do
+  curl -s "$RAW/operations/cwos/skills/document-export/scripts/$f" \
+    -o "operations/cwos/skills/document-export/scripts/$f"
+done
+
+# Reference docs
 mkdir -p operations/cwos/reference
-for ref in taxonomy.md conventional-commits.md agent-skills-standard.md mcp-stack.md; do
+for ref in taxonomy.md conventional-commits.md agent-skills-standard.md mcp-stack.md \
+           permissions-posture-ce.md writing-style-portable.md handoff-protocol.md; do
   curl -s "$RAW/operations/cwos/reference/$ref" \
     -o "operations/cwos/reference/$ref"
 done

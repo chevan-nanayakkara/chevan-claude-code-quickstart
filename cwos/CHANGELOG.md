@@ -8,6 +8,24 @@ The version here tracks this starter's content evolution. It is independent of t
 
 ---
 
+## [1.18.0] — 2026-09-07
+
+### Fixed
+
+**The starter's front door was handing newcomers a silent subset of itself.** `cwos/README.md` advertised "four universal Agent Skills" and "four universal reference docs" while fourteen skill directories and seven reference docs shipped, and the Pattern 1 copy-paste fetch block hardcoded the same 2026-era four-and-four. Anyone bootstrapping that way got a working install missing `document-export`, the entire cross-surface handoff lane, both cold-start skills, the project-management trio, `frontmatter-validate`, the C+E permissions posture, the portable writing standards, and the handoff protocol, with nothing to signal the gap. A visible gap is recoverable; a silent subset is not, because the reader has been told that is everything there is.
+
+- **Pattern 1 now fetches every skill and every reference doc**, and the lists were validated against the filesystem rather than typed from memory.
+- **`document-export`'s `scripts/` toolkit is fetched too.** The loop pulled one `SKILL.md` per skill, which for the only skill in the starter that ships executable support left an install whose documented procedure cannot run. That was the sharpest edge of the same defect.
+- **The block now names itself a snapshot** and points at the two folder READMEs as authoritative, with Pattern 2 named as the path that installs everything without anyone maintaining a list. The lists can drift again; the reader will know where truth is.
+
+### Changed
+
+**The implementation-layer index dropped its per-artifact lists in favor of lanes plus pointers.** Counting artifacts in `cwos/README.md` put the same inventory in three places, and the copy that goes stale is always the one furthest from the files. `skills/` is now described by its lanes (core workflow, maintenance, session orientation, project management, cross-surface handoffs, document production, plus the authoring template) and `reference/` by what it covers, each naming its own README as the authoritative inventory. No counts remain in either line: a number is the part that dates first.
+
+**The writing-scope prompt line lost its em-dashes.** v1.17.0 shipped the line as sent, with two em-dashes four lines above the block's own "No em-dashes." Not a rule violation, since a prompt block is documentation, but the block exists to be pasted by people who never read the section above it, and a rule that has to be defended against the text beside it gets ignored. Upstream rewrote it as two sentences with a colon carrying the list; ported verbatim into both prompt blocks.
+
+---
+
 ## [1.17.0] — 2026-09-07
 
 ### Added
