@@ -8,6 +8,24 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) loosely followe
 
 ---
 
+## [1.20.0] — 2026-09-07
+
+### Changed
+
+**The last two files describing the old topology now describe the current one.** `WHY-CWOS.md` was corrected in v1.19.0; these two were held back because the wording was a producer decision rather than a starter decision. Wording supplied upstream and ported.
+
+- **`README.md`'s `## Upstream` section is now `## Where CWOS comes from`.** The old heading was accurate and useless: a reader scanning for "is this maintained, and by what process?" does not stop at "Upstream." The body states that CWOS is developed in a private trunk and released here, that each `cwos-vX.Y.Z` tag is a release with this changelog as its release notes, and that adopting means taking a tag and recording which one you are on. It closes the door the old text left open: this is not a periodically-synced mirror of somebody's working repository.
+- **`CONTRIBUTING.md` now describes the flow rather than the topology**, which is the part a contributor can act on. Naming the trunk repository would have been accurate and useless in a different way, since it is private and always has been; the old text at least implied a repo the maintainer might describe. The CWOS bullet now says content arrives here as versioned releases, that issues and PRs still belong here, and that accepted changes are made upstream and return in a subsequent release. The stale "the source-of-truth may flip, until then treat the starter as a derivative" paragraph is deleted rather than updated, since the flip it anticipated is not the one that happened.
+- **The PR paragraph now explains a mechanic the file always had and never stated:** a change touching canonical CWOS content is applied upstream first and returns in a release, so the merge may appear as a release commit rather than as the contributor's branch. A contributor whose PR closes without a visible merge would otherwise reasonably conclude they were ignored.
+
+**Two past-tense records stopped using a retired present-tense term.** `CWOS-SETUP.md`'s three-session migration structure and the migration skill's references block both labelled the chevan-content commits `bb255ba` through `1946695` a "reference implementation." They are a **worked example**, which is what they are called now, and a better label independent of the terminology change. The commits stay: losing them would cost the only worked example of the migration.
+
+### Notes
+
+**The test for what gets swept and what stays, since this is the third pass over the same drift:** does the sentence describe the present or the past? A present-tense claim about where canonical content lives is stale and gets fixed. A past-tense record of where something came from is history and stays, because rewriting it would make the release notes lie about their own past. The two rewords above were borderline precisely because they are past-tense records that used a present-tense term.
+
+---
+
 ## [1.19.0] — 2026-09-07
 
 ### Changed

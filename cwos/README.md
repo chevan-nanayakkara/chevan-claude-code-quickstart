@@ -148,11 +148,11 @@ If the summary reflects the architecture, the install is complete.
 
 ---
 
-## Upstream
+## Where CWOS comes from
 
-The canonical CWOS content (`CWOS.md`, `CWOS-SETUP.md`, the universal skills, the reference docs) is currently authored upstream in the maintainer's private working repo (chevan-content). This starter is a periodically-synced derivative.
+CWOS is developed in `workspace-chevan` (trunk, private) and released here. **This starter is the release surface**: each `cwos-vX.Y.Z` tag is a release, [`cwos/CHANGELOG.md`](CHANGELOG.md) is its release notes, and adopting CWOS means taking a tag and recording which one you are on.
 
-After 2-3 more deployments through this starter, the source-of-truth may flip — the starter becomes upstream, and chevan-content references it via submodule. Not locked in yet.
+**This is not a periodically-synced mirror of somebody's working repository.** Content lands here deliberately, versioned, with notes describing what changed and why.
 
 To suggest improvements, see [`../CONTRIBUTING.md`](../CONTRIBUTING.md).
 

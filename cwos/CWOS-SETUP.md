@@ -266,7 +266,7 @@ This tells you what to migrate, what to delete, what to rename, and whether the 
 
 ### Three-session migration structure
 
-Reference implementation: chevan-content Sessions A/B/C (commits `bb255ba` through `1946695`, May 2026). Each session is one focused pass; together they convert the repo.
+Worked example: chevan-content Sessions A/B/C (commits `bb255ba` through `1946695`, May 2026). Each session is one focused pass; together they convert the repo.
 
 **Session A — Foundation (~30-45 min):**
 

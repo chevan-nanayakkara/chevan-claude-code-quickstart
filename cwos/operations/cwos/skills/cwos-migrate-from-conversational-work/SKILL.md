@@ -271,8 +271,8 @@ git log --oneline -15                # commits land in logical groups
 - `/CWOS-SETUP.md` "Migrating from `operations/conversational-work/`" section — read-it-yourself version of this skill
 - `/CWOS.md` — canonical CWOS specification
 - chevan-content's `/operations/cwos/memory/decisions/001-cwos-architecture.md` — reference ADR for clean-break rationale
-- chevan-content's `aiconversations/_system/operations/conversational-work-operations-conversation.md` — reference implementation conversation (Sessions A/B/C entries from May 18, 2026)
-- chevan-content commits `bb255ba` through `1946695` — reference implementation diffs
+- chevan-content's `aiconversations/_system/operations/conversational-work-operations-conversation.md` — worked-example conversation (Sessions A/B/C entries from May 18, 2026)
+- chevan-content commits `bb255ba` through `1946695` — worked-example diffs
 
 ---
 

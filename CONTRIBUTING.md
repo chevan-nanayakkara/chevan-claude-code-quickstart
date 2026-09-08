@@ -6,9 +6,7 @@ This repo is public-domain. Improvements and corrections are welcome.
 
 Most inhabitants in this umbrella are derivatives of content authored upstream in the maintainer's working repos.
 
-- **CWOS** (in `cwos/`): canonical source is currently the maintainer's `chevan-content` repo (private). Changes to `cwos/CWOS.md`, `cwos/CWOS-SETUP.md`, the universal skills, and the reference docs flow from chevan-content downstream to this starter. Suggestions for improvement can be filed here; they'll be evaluated upstream and reflected back.
-
-After the CWOS canonical files stabilize (probably after 2-3 more real-world deployments), the source-of-truth may flip to this starter, with chevan-content referencing it as a submodule. Until then, treat the starter as a derivative.
+- **CWOS** (in `cwos/`): developed in a private working repository and **released here**. `cwos/CWOS.md`, `cwos/CWOS-SETUP.md`, the universal skills and the reference docs arrive as versioned releases rather than being authored in this repo. **File issues and PRs here anyway** — this is the right place for them. Accepted changes are made upstream and come back in a subsequent release, with a changelog entry.
 
 ## How to suggest improvements
 
@@ -20,7 +18,7 @@ For typos, broken links, formatting fixes, or small clarifications:
 2. Make the change in the appropriate inhabitant subdirectory
 3. Open a PR with a clear title (`fix(cwos): typo in CWOS-SETUP.md Section 3` or similar)
 
-The PR will be reviewed; for changes that touch canonical CWOS content, the upstream chevan-content will be updated first and the change propagated here.
+The PR will be reviewed. **Changes touching canonical CWOS content are applied upstream first and returned here in a release**, so a merge may appear as a release commit rather than as your branch. **The contribution is still yours and the changelog will say so.**
 
 ### File an issue
 
