@@ -8,6 +8,27 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) loosely followe
 
 ---
 
+## [1.21.0] — 2026-09-07
+
+### Changed
+
+**The `Unreleased` instruction was describing a path that does not exist for this inhabitant.** Both changelogs told a contributor to stage their change in an `Unreleased` section that the maintainer rolls into the next version. That is correct for content authored in this repo and wrong for `cwos/`, which is authored in trunk and arrives as a release: a change merged directly into `cwos/` would be overwritten by the next release cut. The instruction is replaced rather than deleted, because it was the only place the repo told a contributor how their change gets recorded.
+
+- **This file's "How to update this changelog" section now says not to open an `Unreleased` section**, explains why there is nothing to stage, tells the contributor to file the PR anyway because the PR is the proposal, and names where the credit lands: the release entry that carries the change, by contributor and date, which is how this changelog already records the origin of everything else in it.
+- **`CONTRIBUTING.md` keeps the umbrella instruction and carves out the exception.** The `Unreleased` mechanism is right for inhabitants authored here, and future ones may be. Only `cwos/` is released rather than authored, so only `cwos/` is excepted. The "update both changelogs" line for PRs spanning the umbrella and an inhabitant is qualified to match.
+
+**This is what turns v1.20.0's contributor promise from untested into specified.** "The contribution is still yours and the changelog will say so" was a commitment with no named mechanism behind it, in a repository that has never merged an external PR. It now names the artifact where it is discharged.
+
+**`CONTRIBUTING.md` no longer opens by calling the inhabitants derivatives.** The first sentence a contributor read described this umbrella as holding derivatives of content authored upstream, which is the weaker framing of the same fact that `README.md` and `WHY-CWOS.md` had already stopped using. Inhabitants are now described as maintained privately and **published** here, with CWOS named as a versioned release line. "Published" is true of every inhabitant; "released" is claimed only where tags, a changelog, and versioned notes exist.
+
+**`AICONFIG.template.md` dropped the last live use of a retired term.** The maintenance-lane paragraph said the workspace-chevan May 31, 2026 pass was the canonical worked example and then told the reader to refer to it as the reference implementation. The clause was a second label for the thing the sentence had already named, so it is cut rather than reworded. Every remaining instance of the term in this repository is inside a dated changelog entry, where it stays as history.
+
+### Notes
+
+**The present-versus-past test gains a clause, from a case that looked borderline and was not.** A dated changelog entry contains a present-tense claim about where a skills index is registered. It stays: **a section headed with its own release version and date is read as of that date, so the header supplies the tense the verb is missing.** Editing a shipped release note to correct a tense would make release notes a document that changes after release, which is the one thing they must not be.
+
+---
+
 ## [1.20.0] — 2026-09-07
 
 ### Changed
@@ -496,7 +517,7 @@ Initial release of the cwos starter as the first inhabitant of `chevan-quickstar
 
 ## How to update this changelog
 
-Contributors submitting PRs that touch `cwos/` should add an entry to the **Unreleased** section at the top of this file (create it if it doesn't exist). On release, the maintainer rolls Unreleased into the next versioned section and tags accordingly.
+**Do not add an `Unreleased` section to this file.** `cwos/` content is authored in the trunk repository and arrives here as a release, so there is nothing to stage: a change merged directly into `cwos/` would be overwritten by the next release cut. **File the PR anyway** — it is the proposal, and this is the right place for it. **Accepted changes are credited in the release entry that carries them**, by contributor and date, the same way this changelog already records where every other change originated.
 
 For umbrella-level changes (adding a new inhabitant, top-level renames, license changes), update the umbrella `CHANGELOG.md` at the repo root instead of (or in addition to) this file.
 

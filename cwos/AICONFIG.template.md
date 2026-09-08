@@ -372,7 +372,7 @@ The CWOS architecture treats conversation-file YAML frontmatter as the canonical
 
 **Rule:** after any folder rename, file relocation, or conversation deletion, run the [`frontmatter-validate`](operations/cwos/skills/frontmatter-validate/SKILL.md) skill before committing the restructure. The skill reports dangling references file-by-file; apply the 4-rule maintenance pattern (Rule A: cross-system path migrations; Rule B: root-folder relocations; Rule C: stale archive folders; Rule D: sibling renames + dangling drops) to clean any findings.
 
-The canonical worked example of the 4-rule pattern is the workspace-chevan May 31, 2026 maintenance pass — refer to that as the reference implementation when cleaning new findings; the pattern transfers to any CWOS-aligned repo.
+The canonical worked example of the 4-rule pattern is the workspace-chevan May 31, 2026 maintenance pass; the pattern transfers to any CWOS-aligned repo.
 
 ---
 

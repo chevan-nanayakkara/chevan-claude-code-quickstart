@@ -4,7 +4,7 @@ This repo is public-domain. Improvements and corrections are welcome.
 
 ## Where canonical content lives
 
-Most inhabitants in this umbrella are derivatives of content authored upstream in the maintainer's working repos.
+Most inhabitants in this umbrella are maintained in the maintainer's private working repos and published here rather than authored in this repo. **CWOS is published as a versioned release line** — see [`cwos/CHANGELOG.md`](cwos/CHANGELOG.md).
 
 - **CWOS** (in `cwos/`): developed in a private working repository and **released here**. `cwos/CWOS.md`, `cwos/CWOS-SETUP.md`, the universal skills and the reference docs arrive as versioned releases rather than being authored in this repo. **File issues and PRs here anyway** — this is the right place for them. Accepted changes are made upstream and come back in a subsequent release, with a changelog entry.
 
@@ -50,7 +50,9 @@ This repo follows a two-level changelog convention so contributors and the maint
 
 When you submit a PR, add an entry to the **Unreleased** section at the top of the relevant changelog (create the Unreleased section if it doesn't exist yet). On release, the maintainer rolls Unreleased into the next versioned section and tags accordingly.
 
-If your PR touches both the umbrella and an inhabitant, update both changelogs.
+**Exception: `cwos/`.** That inhabitant is released rather than authored here, so it has no `Unreleased` section; a contribution to it is credited in the release entry that carries it. See [`cwos/CHANGELOG.md`](cwos/CHANGELOG.md).
+
+If your PR touches both the umbrella and an inhabitant, update both changelogs, subject to the `cwos/` exception above.
 
 ## What this repo is not
 
