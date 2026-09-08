@@ -8,6 +8,23 @@ The version here tracks this starter's content evolution. It is independent of t
 
 ---
 
+## [1.16.0] — 2026-09-07
+
+### Added
+
+**`handoffs/` in the spec's hub-repo structure, closing the gap v1.15.0 left open on purpose.** The portable spec's hub tree listed `memory/`, `skills/`, and `reference/` and stopped there, which is what v1.15.0's release notes recorded as deliberate: the starter's handoff lane had to name the operations layer before the spec could describe it. It does, so the spec follows. Tree block and the paragraph under it ported verbatim from the upstream reference implementation.
+
+- **`CWOS.md`** — `handoffs/` added to the hub tree with `<project-name>/` and the `YYYY-MM-DD-HHMM-<from>-to-<to>.md` filename beneath it. The only other lines that moved are `reference/` from `└──` to `├──` and its four children from spaces to `│`.
+- **The paragraph under the tree states that `handoffs/` is a fourth folder, not a fourth layer.** The first three are the configuration / state / procedure split; handoffs are correspondence, an inbox and an outbox, rather than a fourth kind of knowledge. Without that sentence a reader counts four boxes in the tree and goes looking for a fourth entry in a three-layer model.
+
+**`CWOS-SETUP.md` now scaffolds the folder it tells you to use.** Both layout trees in the setup guide stopped at three folders, so a repo bootstrapped from the guide came up without the folder the handoff protocol in the same starter routes files into.
+
+- Scenario A's layout gains `handoffs/`, marked as conditional on the hub exchanging work with other surfaces.
+- Step 2's `operations/cwos/` tree gains `handoffs/<project-name>/` and, under `reference/`, the `handoff-protocol.md` that shipped in v1.12.0 and was never added to this list. Step 2's instruction line said "the three-folder structure" and now names the layer instead.
+- One sentence after that tree says `handoffs/` is the only conditional one of the four: a repo that never crosses surfaces does not need it, and a repo that does should create it here rather than under `working/` or another scratch area.
+
+---
+
 ## [1.15.0] — 2026-09-07
 
 ### Fixed

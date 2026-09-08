@@ -316,12 +316,17 @@ hub/
 │   ├── README.md                      # Index of available skills
 │   └── <skill-name>/
 │       └── SKILL.md
-└── reference/                         # Standing knowledge
-    ├── mcp-stack.md                   # Standard MCP servers
-    ├── conventional-commits.md
-    ├── aider-config.md                # If using Aider
-    └── ...
+├── reference/                         # Standing knowledge
+│   ├── mcp-stack.md                   # Standard MCP servers
+│   ├── conventional-commits.md
+│   ├── aider-config.md                # If using Aider
+│   └── ...
+└── handoffs/                          # Cross-surface correspondence
+    └── <project-name>/
+        └── YYYY-MM-DD-HHMM-<from>-to-<to>.md
 ```
+
+**`handoffs/` is a fourth folder, not a fourth layer.** The first three are the configuration / state / procedure split. Handoffs are an inbox and an outbox — correspondence, rather than accumulated state, procedure, or standing knowledge. They live in the hub layer because that is where working infrastructure lives, and they belong in the operations layer rather than a scratch folder because a handoff is the durable record of what a receiving surface was told and what it returned. They routinely stay live for weeks, which is exactly when someone needs to reread one. Protocol detail in `reference/handoff-protocol.md`.
 
 ## Spoke repo baseline
 

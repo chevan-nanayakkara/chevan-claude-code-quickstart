@@ -31,7 +31,8 @@ hub/
 ├── operations/cwos/
 │   ├── memory/
 │   ├── skills/
-│   └── reference/
+│   ├── reference/
+│   └── handoffs/      (if this hub exchanges work with other surfaces)
 └── aiconversations/   (optional reasoning thread layer)
 ```
 
@@ -121,7 +122,7 @@ Last Updated: <date>
 
 ### Step 2 — Implementation layer at `operations/cwos/`
 
-Create the three-folder structure for CWOS implementation.
+Create the implementation-layer structure for CWOS.
 
 ```
 operations/cwos/
@@ -139,13 +140,18 @@ operations/cwos/
 │   ├── README.md                      # skills index
 │   └── _template/
 │       └── SKILL.md                   # Agent Skills format template
-└── reference/                         # standing knowledge
-    ├── README.md
-    ├── taxonomy.md                    # CWOS vocabulary
-    ├── mcp-stack.md                   # MCP server configuration reference
-    ├── agent-skills-standard.md       # Agent Skills format reference
-    └── conventional-commits.md        # Conventional Commits convention
+├── reference/                         # standing knowledge
+│   ├── README.md
+│   ├── taxonomy.md                    # CWOS vocabulary
+│   ├── mcp-stack.md                   # MCP server configuration reference
+│   ├── agent-skills-standard.md       # Agent Skills format reference
+│   ├── conventional-commits.md        # Conventional Commits convention
+│   └── handoff-protocol.md            # cross-surface handoff spec, if used
+└── handoffs/                          # cross-surface correspondence, one folder per project
+    └── <project-name>/
 ```
+
+`handoffs/` is the only one of the four that is conditional: a repo that never crosses surfaces does not need it, and a repo that does should create it here rather than under `working/` or another scratch area. See `reference/handoff-protocol.md`.
 
 Copy templates from the source repo. Most files are stubs that get content as the repo accumulates decisions, skills, and reference material.
 
