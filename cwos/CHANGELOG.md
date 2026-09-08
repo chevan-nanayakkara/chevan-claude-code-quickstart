@@ -8,6 +8,22 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) loosely followe
 
 ---
 
+## [1.19.0] — 2026-09-07
+
+### Changed
+
+**`WHY-CWOS.md` "Status" now states the settled topology instead of anticipating a flip that happened differently.** The section described this starter as a periodically-synced derivative of a reference implementation in `chevan-content`, with content flow "becoming bidirectional" and a source-of-truth flip pending. Tonight's changelog header points a reader at this section, so following that pointer landed them on a paragraph contradicting the sentence that sent them.
+
+- **The topology, settled September 7, 2026:** `workspace-chevan` develops CWOS, this starter is the published release surface where versions are cut and changelogged, and `chevan-content` is a consumer instance rather than a peer.
+- **A paragraph for the adopter**, which the old text did not have: each `cwos-vX.Y.Z` tag is a release, this changelog is its release notes, and adoption means taking a tag and recording which one you are on. Not a public snapshot of someone's working repository.
+- **Both retired terms are named and explained rather than quietly deleted.** "Reference implementation" implied a peer whose behaviour defines correctness. The "eventual flip" sentence anticipated this starter becoming canonical upstream with `chevan-content` referencing it by submodule; the flip that happened was `workspace-chevan` becoming trunk with this repo as the release surface. Older changelog entries still carry both terms and are left standing as history, since rewriting them would make the release notes lie about their own past.
+
+### Notes
+
+**Two files still describe the old topology and are deliberately untouched here**, because the wording is a trunk decision rather than a starter decision: `README.md`'s "Upstream" section, and `CONTRIBUTING.md`, which tells an outside contributor that canonical CWOS content lives in `chevan-content` and that PRs touching it get updated there first. `CONTRIBUTING.md` is the one that routes a contributor at the wrong repository, so it is the one worth closing next.
+
+---
+
 ## [1.18.0] — 2026-09-07
 
 ### Fixed

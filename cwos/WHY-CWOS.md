@@ -273,9 +273,13 @@ If it helps you, take it. If you improve it, send a PR (see [CONTRIBUTING.md](..
 
 CWOS is running in production today. The canonical spec evolves as real friction surfaces.
 
-**On the source-of-truth direction.** This starter at [`chevan-quickstarts/cwos/`](.) began as a periodically-synced derivative of the maintainer's reference implementation in `chevan-content`. As of June 2026, content flow is becoming bidirectional. The architecture spec, the migration skill, and the foundational documents still originate in `chevan-content`; community-facing improvements like the maintenance lane (frontmatter-validate / conversational-maintenance-review / cwos-cold-start, all authored during the workspace-chevan May 31, 2026 post-CWOS maintenance pass) now originate in workspace-chevan, get pushed here as the public-facing source, and flow back into chevan-content as the reference implementation absorbs them.
+**On the source-of-truth direction.** Settled September 7, 2026. **`workspace-chevan` develops CWOS.** **This starter at [`chevan-quickstarts/cwos/`](.) is the published release surface**, where versions are cut, tagged, and changelogged. **`chevan-content` is a consumer instance** — customer zero, running CWOS rather than developing it.
 
-The eventual flip — this starter as the canonical upstream, chevan-content referencing it via submodule — remains a future call rather than a current commitment. Expect minor edits as the spec stabilizes; major structural changes get documented in [CHANGELOG.md](CHANGELOG.md) with migration notes.
+**What that means if you are reading this to adopt CWOS.** Each `cwos-vX.Y.Z` tag is a release of this starter, [CHANGELOG.md](CHANGELOG.md) is its release notes, and the sensible way to adopt is by tag: take a release, record which one you are on, and read the changelog when you move. Nothing here is a snapshot of somebody's working repository that happens to be public.
+
+**Two terms were retired rather than updated**, and both appear in this repo's older changelog entries where they are left standing as history. *"Reference implementation"* implied a peer repository whose behaviour defines correctness, which is not a role anything in this arrangement holds. The *"eventual flip"* sentence that used to sit here anticipated this starter becoming canonical upstream with `chevan-content` referencing it by submodule; **the flip that actually happened was a different one** — `workspace-chevan` became trunk, with this repo as the release surface. Development direction governs where CWOS is *built*, not whose work counts: an instance that builds something the producer lacks proposes it upstream, and it is adopted there and redistributed.
+
+Expect minor edits as the spec stabilizes; major structural changes get documented in [CHANGELOG.md](CHANGELOG.md) with migration notes.
 
 ---
 
