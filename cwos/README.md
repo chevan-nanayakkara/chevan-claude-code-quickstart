@@ -24,6 +24,7 @@ This subdirectory of [`chevan-quickstarts`](../) is a self-contained CWOS starte
 
 ### Implementation layer (canonical at `operations/cwos/`)
 
+- **[`operations/cwos/README.md`](operations/cwos/README.md)** — describes the implementation layer itself: the three folders, the conditional fourth (`handoffs/`), and where each kind of content goes. Copy it and replace the deviations section with the target repo's own.
 - **[`operations/cwos/skills/`](operations/cwos/skills/)** — four universal Agent Skills:
   - `run-prompt-protocol/` — the core run-prompt workflow
   - `conversation-archiving/` — archive conversation files over 75KB
@@ -55,6 +56,10 @@ curl -s "$RAW/CWOS-SETUP.md" -o CWOS-SETUP.md
 curl -s "$RAW/AGENTS.md" -o AGENTS.md
 curl -s "$RAW/AICONFIG.template.md" -o AICONFIG.template.md
 curl -s "$RAW/CLAUDE.template.md" -o CLAUDE.template.md
+
+# Implementation-layer README
+mkdir -p operations/cwos
+curl -s "$RAW/operations/cwos/README.md" -o operations/cwos/README.md
 
 # Universal skills (4)
 for skill in run-prompt-protocol conversation-archiving cwos-migrate-from-conversational-work _template; do

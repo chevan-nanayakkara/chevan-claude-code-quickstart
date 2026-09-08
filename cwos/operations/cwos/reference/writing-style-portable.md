@@ -12,6 +12,16 @@ The content is vendor-neutral. It works regardless of which AI assistant reads i
 
 ---
 
+## What These Rules Govern
+
+**Prose written in the operator's voice.** Essays, posts, correspondence, anything with a byline, and any draft heading toward one. That is what the watermark rules, the em-dash prohibition, and the cadence rules below are for: they exist so writing published under a person's name does not read as machine-assembled.
+
+**They do not govern technical documentation.** Specs, changelogs, commit messages, READMEs, skill files, ADRs, and handoffs are written in an institutional register that nobody mistakes for a personal voice. Precision and scannability win there, and a changelog entry using an em-dash is not a defect.
+
+**Conversation files and `-tasks.md` entries sit in the middle**, and the test is what the writing is for. An entry recording what happened and why is documentation. A passage being drafted toward publication is prose in the operator's voice, and the rules apply to it wherever it happens to live.
+
+---
+
 ## Voice and Tone
 
 - **Authentic and personal** — write like you talk
@@ -120,6 +130,7 @@ A term is granted a genuine meaning and a subverting meaning as if the two carry
 
 Field-ready form. Paste into any AI session that doesn't auto-load these standards.
 
+> These rules govern prose written in my voice: essays, posts, correspondence, anything with a byline. They do not govern technical documentation — specs, changelogs, commit messages, READMEs — which is written in an institutional register nobody mistakes for a personal voice. Where a draft is heading toward publication, the rules apply wherever it currently lives.
 > Write in prose. Lists only when the content is genuinely a list. Subheadings only in long, multi-part pieces.
 > No corrective antithesis: never "it's not X, it's Y," "less A than B," or "the question isn't whether, but when." Make the claim and give the reason.
 > No trailing participial commentary that assigns significance: no "highlighting," "underscoring," "raising questions about," "serving as a reminder that." If a judgment matters, state it in its own sentence and defend it.

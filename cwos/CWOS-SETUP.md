@@ -31,8 +31,7 @@ hub/
 ├── operations/cwos/
 │   ├── memory/
 │   ├── skills/
-│   ├── reference/
-│   └── handoffs/      (if this hub exchanges work with other surfaces)
+│   └── reference/
 └── aiconversations/   (optional reasoning thread layer)
 ```
 
@@ -140,18 +139,24 @@ operations/cwos/
 │   ├── README.md                      # skills index
 │   └── _template/
 │       └── SKILL.md                   # Agent Skills format template
-├── reference/                         # standing knowledge
-│   ├── README.md
-│   ├── taxonomy.md                    # CWOS vocabulary
-│   ├── mcp-stack.md                   # MCP server configuration reference
-│   ├── agent-skills-standard.md       # Agent Skills format reference
-│   ├── conventional-commits.md        # Conventional Commits convention
-│   └── handoff-protocol.md            # cross-surface handoff spec, if used
-└── handoffs/                          # cross-surface correspondence, one folder per project
-    └── <project-name>/
+└── reference/                         # standing knowledge
+    ├── README.md
+    ├── taxonomy.md                    # CWOS vocabulary
+    ├── mcp-stack.md                   # MCP server configuration reference
+    ├── agent-skills-standard.md       # Agent Skills format reference
+    ├── conventional-commits.md        # Conventional Commits convention
+    └── handoff-protocol.md            # cross-surface handoff spec, if used
 ```
 
-`handoffs/` is the only one of the four that is conditional: a repo that never crosses surfaces does not need it, and a repo that does should create it here rather than under `working/` or another scratch area. See `reference/handoff-protocol.md`.
+Plus one conditional folder, created when it is first needed rather than at bootstrap:
+
+```
+operations/cwos/
+└── handoffs/
+    └── <project-name>/                # cross-surface correspondence, one folder per project
+```
+
+`handoffs/` is the only one of the four that is conditional. A repository that never crosses surfaces has no correspondence to file and should not be handed an empty folder to explain to itself; one that does should create it here rather than under `working/` or another scratch area. See `reference/handoff-protocol.md`.
 
 Copy templates from the source repo. Most files are stubs that get content as the repo accumulates decisions, skills, and reference material.
 
@@ -207,6 +212,7 @@ When bootstrapping from an existing CWOS-aligned repo, these files are reusable 
 - `CWOS-SETUP.md` — this file
 - `CLAUDE.md` — version + repo name update
 - `AGENTS.md` — minor adjustments
+- `operations/cwos/README.md` (implementation-layer README; replace the deviations section)
 - `operations/cwos/memory/decisions/_template.md` (ADR template)
 - `operations/cwos/memory/projects/_template.md` (re-entry brief template)
 - `operations/cwos/skills/_template/SKILL.md` (Agent Skills format template)

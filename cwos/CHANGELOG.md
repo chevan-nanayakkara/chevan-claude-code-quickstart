@@ -8,6 +8,31 @@ The version here tracks this starter's content evolution. It is independent of t
 
 ---
 
+## [1.17.0] — 2026-09-07
+
+### Added
+
+**`operations/cwos/README.md`, the implementation-layer README the starter told adopters to write and never shipped.** `CWOS-SETUP.md` Step 2 lists the file and describes its job, and every other file in that tree had a template behind it. Genericized from the upstream reference implementation: the four-folder framing became three plus a conditional fourth, and the dated folder-move provenance and the repo-specific ledger path came out. What survives is the part that earns the file, the statement that `handoffs/` does not map onto the configuration / state / procedure split, and the three-way "what goes where" list.
+
+Shipped as a populated `README.md` rather than a `_template.md`, because that is what `CWOS-SETUP.md` tells an adopter to create and what the sibling folders already carry. The deviations section ships as an italic instruction the adopter deletes once it has real content. Registered in `cwos/README.md`'s implementation-layer list, its Pattern 1 fetch block, and `CWOS-SETUP.md`'s "directly copyable" list.
+
+**The scope note the writing standards were missing.** The em-dash prohibition and the watermark rules stated a rule without saying what it governed, which is why a reader could not tell whether a changelog entry using an em-dash was a defect. It was not: the rules govern prose written in the operator's voice, and technical documentation is written in an institutional register that has never been held to them. Ported from upstream AICONFIG v5.14.0.
+
+- **`AICONFIG.template.md`** — new `### What these rules govern` subsection opening `## STANDARDS - WRITING`, ahead of Voice and Tone.
+- **`operations/cwos/reference/writing-style-portable.md`** — the same text as `## What These Rules Govern`, ahead of Voice and Tone. This is the copy that matters: the file is built to be dropped into repositories where nobody has the surrounding context, and an unscoped prohibition there gets over-applied or quietly ignored.
+- **Both operator prompt blocks** gain a scope line ahead of "Write in prose."
+- The bare "No em-dashes" bullet is unchanged; it inherits scope from the section it now sits under.
+
+**The rule was never being violated. It was never scoped.** That is the distinction the new text records, and the reason this is an addition rather than a correction.
+
+### Changed
+
+**`CWOS.md` gains the conditional note under the hub tree**, so the spec and the setup guide agree about `handoffs/`: create it when the first handoff is written, not at bootstrap. The paragraph closes by saying why the other three folders are unconditional, which turns the exception into a test the next person adding a folder to that tree can apply.
+
+**`CWOS-SETUP.md` Step 2 restructured to match upstream exactly.** v1.16.0 put `handoffs/` inside the main scaffolding tree. Upstream adopted the fix but split the conditional folder into its own block after the tree, which reads better: what an adopter creates at bootstrap stays visually separate from what waits for a reason to exist. Step 2 is now byte-identical to the upstream copy, and Scenario A's layout went back to three folders for the same reason.
+
+---
+
 ## [1.16.0] — 2026-09-07
 
 ### Added
