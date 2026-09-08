@@ -4,7 +4,7 @@ Per-inhabitant change log for the CWOS starter inside [`chevan-quickstarts`](../
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) loosely followed; versioning [SemVer](https://semver.org).
 
-The version here tracks this starter's content evolution. It is independent of the canonical CWOS spec version at the upstream reference implementation (`chevan-content`) until the source-of-truth flip happens (see [`WHY-CWOS.md`](WHY-CWOS.md) "Status").
+**This is the CWOS release line.** CWOS is developed in `workspace-chevan` (trunk) and released here: each `cwos-vX.Y.Z` tag is a release of the starter, and the entries below are its release notes. Consumer instances adopt a release by tag and record which one they are on. See [`WHY-CWOS.md`](WHY-CWOS.md) "Status".
 
 ---
 
